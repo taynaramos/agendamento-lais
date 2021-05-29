@@ -45,7 +45,10 @@ export const Login = () => {
 
             <div className={'form-field'}>
               <span>Senha</span>
-              <TextField variant="outlined" type="password" />
+              <TextField
+                variant="outlined"
+                type="password"
+              />
             </div>
 
             <Link to={'/mudar-senha'}><p className={'forgot-password'}>Esqueceu sua senha?</p></Link>
