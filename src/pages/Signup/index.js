@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { Paper, Button, TextField, Modal, Backdrop, Fade } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -45,6 +45,7 @@ const initialFValues = {
 export const Signup = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  let history = useHistory();
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,6 +90,7 @@ export const Signup = () => {
     if (validate()) {
 
       alert("Dados salvos com sucesso!");
+      history.push("/agendamentos")
 
       console.log(values)
       resetForm()
