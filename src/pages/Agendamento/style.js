@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-import folderWhite from 'assets/images/folder-white.svg'
-import folder from 'assets/images/folder.svg'
-
 export const Container = styled.main`
 
 .menu {
@@ -104,10 +101,6 @@ export const Container = styled.main`
 .tabs-btn:hover {
     background-color: #00B3F3;
     color: #fff;
-}
-
-.tabs-btn #folder {
-    max-height: 25px;
 }
 
 .tabs-btn-icon {
