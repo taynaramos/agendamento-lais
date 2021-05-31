@@ -2,18 +2,33 @@ import React, { useState } from 'react'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
-import { Divider, Button, Box } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+import { Divider, Button, Box, InputBase } from '@material-ui/core'
 
 import { Container } from './style'
+import { MeusAgendamentos, Agendar } from 'components'
 
 import calendar from 'assets/images/calendar-dark.svg'
 import profile from 'assets/images/photo-profile.png'
 import folder from 'assets/images/folder.svg'
+import folderWhite from 'assets/images/folder-white.svg'
 import user from 'assets/images/user-blue.svg'
 
 export const Agendamento = () => {
 
   const [isOpen, setIsOpen] = useState(false)
+  const [tabOption, setTabOption] = useState('meus-agendamentos');
+
+
+
+  function meusAgendamentos() {
+    setTabOption('meus-agendamentos')
+  }
+  function agendar() {
+    setTabOption('agendar')
+  }
+
+
 
   return (
     <Container>
@@ -37,7 +52,7 @@ export const Agendamento = () => {
               <span id={'name'}>Johnny Clark</span>
             </div>
 
-            <ExpandMoreIcon fontSize="small" onClick={() => setIsOpen(!isOpen)} className={isOpen ? 'icon-expanded' : ''}  />
+            <ExpandMoreIcon fontSize="small" onClick={() => setIsOpen(!isOpen)} className={isOpen ? 'icon-expanded' : ''} />
 
           </div>
 
@@ -55,18 +70,18 @@ export const Agendamento = () => {
           </div>
         </Box>
 
-        <Divider variant="middle" className={'divider'} />
+        <Divider className={'divider'} />
 
         <div className={'menu-tabs'}>
 
-          <Button variant={'contained'} className={'tabs-btn'}>
-            <img src={folder} alt={''} className={'tabs-btn-icon'} id={'folder'} />
+          <Button variant={'contained'} className={tabOption === "meus-agendamentos" ? 'tabs-btn tabs-btn-focus' : 'tabs-btn'} onClick={meusAgendamentos}>
+            <img src={tabOption === "meus-agendamentos" ? folderWhite : folder} alt={''} className={'tabs-btn-icon'} id={'folder'} />
             <span>Meus agendamentos</span>
           </Button>
 
-          <Button variant={'contained'} className={'tabs-btn'}>
+          <Button variant={'contained'} className={tabOption === "agendar" ? 'tabs-btn tabs-btn-focus' : 'tabs-btn'} onClick={agendar}>
             <CreateRoundedIcon fontSize="small" className={'tabs-btn-icon'} />
-            <span>Agendamentar</span>
+            <span>Agendar</span>
           </Button>
 
         </div>
@@ -75,8 +90,35 @@ export const Agendamento = () => {
 
       <section className={'main'}>
 
-        <div className={'main-header'}></div>
-        <div className={'main-content'}></div>
+        <div className={'main-header'}>
+
+          <div className={'main-header-title'}>
+            {tabOption === "meus-agendamentos" ? 'Meus agendamentos' : 'Agendar'}
+          </div>
+
+          <div className={'main-header-search'}>
+            <InputBase
+              placeholder="Pesquisar"
+              inputProps={{ 'aria-label': 'search' }}
+              className={'search-input'}
+            />
+            <div className={'search-icon'}>
+              <SearchIcon />
+            </div>
+          </div>
+
+        </div>
+
+        <div className={'main-content'}>
+
+
+          {tabOption === "meus-agendamentos" ?
+            <MeusAgendamentos />
+            :
+            <Agendar />
+          }
+
+        </div>
 
       </section>
 

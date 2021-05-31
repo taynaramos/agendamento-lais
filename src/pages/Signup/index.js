@@ -1,211 +1,230 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Link, useHistory } from 'react-router-dom'
 
+import { Formik, Field } from 'formik';
 import { Paper, Button, TextField, Modal, Backdrop, Fade } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { Banner, useForm, Form } from 'components'
+import { Banner } from 'components'
 
 import { Container } from './style'
 
 import user from 'assets/images/user.svg'
 
+
 const useStyles = makeStyles(() => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '1.5rem 3rem',
-    width: '60%',
-  },
-  title: {
-    color: '#00B3F3',
-  },
-  btn: {
-    backgroundColor: '#FFFFFF',
-    border: 'solid 1px #ABABAB ',
-    marginLeft: 'calc(100% - 5rem)',
-    textTransform: 'capitalize',
-  }
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+        padding: '1.5rem 3rem',
+        width: '60%',
+    },
+    title: {
+        color: '#00B3F3',
+    },
+    btn: {
+        backgroundColor: '#FFFFFF',
+        border: 'solid 1px #ABABAB ',
+        marginLeft: 'calc(100% - 5rem)',
+        textTransform: 'capitalize',
+    }
 }));
 
-const initialFValues = {
-  name: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
-
 export const Signup = () => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  let history = useHistory();
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  //  Validações
-
-  const validate = (fieldValues = values) => {
-    let temp = { ...errors }
-    if ('name' in fieldValues)
-      temp.name = fieldValues.name ? "" : "Obrigatório"
-    if ('email' in fieldValues)
-      temp.email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(fieldValues.email) ? "" : "Email não válido"
-    if ('password' in fieldValues)
-      temp.password = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(fieldValues.password) ? "" : "Mínimo de oito caracteres, pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
-    if ('confirmPassword' in fieldValues)
-      temp.confirmPassword = fieldValues.confirmPassword === fieldValues.password ? "" : "As senhas não estão iguais"
-    setErrors({
-      ...temp
-    })
 
 
-    if (fieldValues === values)
-      return Object.values(temp).every(x => x === "")
-  }
-
-  const {
-    values,
-    setValues,
-    errors,
-    setErrors,
-    handleInputChange,
-    resetForm
-  } = useForm(initialFValues, true, validate);
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    if (validate()) {
-
-      alert("Dados salvos com sucesso!");
-      history.push("/agendamentos")
-
-      console.log(values)
-      resetForm()
-      return
+    const initialValues = {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
     }
-  }
 
-  return (
-    <Container>
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    let history = useHistory();
 
-      <Banner />
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
-      <section className={'main'}>
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-        <div className={'main-signup'}>
 
-          <span>Já tem conta?</span>
 
-          <Link to={'/'}>
-            <Button variant={'contained'} className={'main-signup-btn'}>
-              <img className={'btn-user'} src={user} alt={''}></img>
-              <span className={'btn-text'}>Entrar</span>
-            </Button>
-          </Link>
 
-        </div>
+    return (
+        <React.Fragment>
+            <Container>
 
-        <Form onSubmit={handleSubmit} className={'main-form'}>
+                <Banner />
 
-          <Paper className={'form'}>
+                <section className={'main'}>
 
-            <p>Preencha os campos abaixo</p>
-            <p>É rápido, simples e seguro</p>
+                    <div className={'main-signup'}>
 
-            <div className={'form-field'}>
-              <span>Email</span>
-              <TextField
-                variant="outlined"
-                name="email"
-                value={values.email}
-                onChange={handleInputChange}
-                {...(errors.email && { error: true, helperText: errors.email })}
-              />
-            </div>
+                        <span>Já tem conta?</span>
 
-            <div className={'form-field'}>
-              <span>Nome</span>
-              <TextField
-                variant="outlined"
-                name="name"
-                value={values.name}
-                onChange={handleInputChange}
-                {...(errors.name && { error: true, helperText: errors.name })}
-              />
-            </div>
+                        <Link to={'/'}>
+                            <Button variant={'contained'} className={'main-signup-btn'}>
+                                <img className={'btn-user'} src={user} alt={''}></img>
+                                <span className={'btn-text'}>Entrar</span>
+                            </Button>
+                        </Link>
 
-            <div className={'form-field'}>
-              <span>Senha</span>
-              <TextField
-                variant="outlined"
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleInputChange}
-                {...(errors.password && { error: true, helperText: errors.password })}
+                    </div>
 
-              />
-            </div>
+                    <div className={'main-form'}>
 
-            <div className={'form-field'}>
-              <span>Confirmação de senha</span>
-              <TextField
-                variant="outlined"
-                type="password"
-                name="confirmPassword"
-                value={values.confirmPassword}
-                onChange={handleInputChange}
-                {...(errors.confirmPassword && { error: true, helperText: errors.confirmPassword })}
-              />
-            </div>
+                        <Paper className={'form'}>
 
-            <Button onClick={handleSubmit} variant={'contained'} className={'form-btn'}>
-              <span>Continuar</span>
-            </Button>
+                            <p>Preencha os campos abaixo</p>
+                            <p>É rápido, simples e seguro</p>
 
-          </Paper>
+                            <Formik
+                                initialValues={initialValues}
+                                validate={values => {
+                                    const errors = {};
+                                    if (!values.name)
+                                        errors.name = "Obrigatório"
+                                    if (!(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)))
+                                        errors.email = "Email não válido"
+                                    if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(values.password)))
+                                        errors.password = "Mínimo de oito caracteres, pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
+                                    if (!(values.confirmPassword === values.password))
+                                        errors.confirmPassword = "As senhas não estão iguais"
 
-        </Form>
+                                    return errors;
+                                }}
+                                onSubmit={(values, { setSubmitting }) => {
+                                    setTimeout(() => {
 
-        <p className={'agreement'}>Ao assinar você concorda com os <span onClick={handleOpen}>termos de serviço</span> e <span onClick={handleOpen}>política de privacidade</span></p>
+                                        // alert(JSON.stringify(values, null, 2));
 
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-              <h2 className={classes.title} id="transition-modal-title">Termos e Política de privacidade</h2>
-              <p id="transition-modal-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd</p>
-              <Button variant={'contained'} className={classes.btn} onClick={handleClose}>Fechar</Button>
+                                        alert("Dados salvos com sucesso!");
+                                        history.push("/agendamentos")
 
-            </div>
-          </Fade>
-        </Modal>
+                                        console.log(values)
+                                        setSubmitting(false);
+                                    }, 400);
+                                }}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleSubmit,
+                                }) => (
+                                        <form onSubmit={handleSubmit}>
 
-      </section>
+                                            <div className={'form-field'}>
+                                                <span>Email</span>
+                                                <TextField
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    id="email"
+                                                    name="email"
+                                                    value={values.email}
+                                                    onChange={handleChange}
+                                                    error={touched.email && Boolean(errors.email)}
+                                                    helperText={touched.email && errors.email}
+                                                />
+                                            </div>
 
-    </Container >
-  )
+                                            <div className={'form-field'}>
+                                                <span>Nome</span>
+                                                <TextField
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    id="name"
+                                                    name="name"
+                                                    value={values.name}
+                                                    onChange={handleChange}
+                                                    error={touched.name && Boolean(errors.name)}
+                                                    helperText={touched.name && errors.name}
+                                                />
+                                            </div>
+
+                                            <div className={'form-field'}>
+                                                <span>Senha</span>
+                                                <TextField
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    id="password"
+                                                    name="password"
+                                                    type="password"
+                                                    value={values.password}
+                                                    onChange={handleChange}
+                                                    error={touched.password && Boolean(errors.password)}
+                                                    helperText={touched.password && errors.password}
+                                                />
+                                            </div>
+
+                                            <div className={'form-field'}>
+                                                <span>Confirmação de senha</span>
+                                                <TextField
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    id="confirmPassword"
+                                                    name="confirmPassword"
+                                                    type="password"
+                                                    value={values.confirmPassword}
+                                                    onChange={handleChange}
+                                                    error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                                                    helperText={touched.confirmPassword && errors.confirmPassword}
+                                                />
+                                            </div>
+
+                                            <Button variant="contained" fullWidth type="submit" className={'form-btn'}>
+                                                Continuar
+                                            </Button>
+                                        </form>
+                                    )}
+                            </Formik>
+                        </Paper>
+                    </div>
+
+
+
+                    <p className={'agreement'}>Ao assinar você concorda com os <span onClick={handleOpen}>termos de serviço</span> e <span onClick={handleOpen}>política de privacidade</span></p>
+
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={open}>
+                            <div className={classes.paper}>
+                                <h2 className={classes.title} id="transition-modal-title">Termos e Política de privacidade</h2>
+                                <p id="transition-modal-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd</p>
+                                <Button variant={'contained'} className={classes.btn} onClick={handleClose}>Fechar</Button>
+
+                            </div>
+                        </Fade>
+                    </Modal>
+
+                </section>
+
+            </Container>
+
+
+        </React.Fragment >
+    )
 }

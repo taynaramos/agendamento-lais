@@ -1,2 +1,6 @@
 export { Banner } from './Banner'
+export { MeusAgendamentos } from './MeusAgendamentos'
+export { AgendamentoRealizado } from './AgendamentoRealizado'
+export { Agendar } from './Agendar'
+export { LocaisVacinacao } from './LocaisVacinacao'
 export { useForm, Form } from './useForm'
