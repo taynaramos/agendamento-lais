@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+
+import { useReactToPrint } from 'react-to-print';
 
 import { Paper, Divider, Modal, Backdrop, Fade, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 
 import { Container } from './style'
-import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(() => ({
     modal: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(() => ({
         border: 'solid 1px #ABABAB ',
         marginLeft: 'calc(100% - 5rem)',
         textTransform: 'capitalize',
+        marginTop: '10px',
     },
     list: {
         color: '#FF4646',
@@ -66,6 +68,10 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
     const [selectedLocal, setSelectedLocal] = useState(null)
     const { campanha, data, municipio } = dados
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+    });
 
     const arr = arrayDisponibilidade.filter((option) => option.municipio === municipio)
     const arrFiltered = arr.filter((option) => option.data === data)
@@ -128,7 +134,7 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
+                    <div className={classes.paper} ref={componentRef}>
                         <h2 className={classes.title} id="transition-modal-title">Comprovante de agendamento</h2>
 
                         <div>
@@ -149,6 +155,7 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
                         <p className={classes.field}>Localização: <span className={classes.fieldData}>{selectedLocal}</span></p>
                         <p className={classes.field}>Vacina: <span className={classes.fieldData}>Coronavac - Buntantan</span></p>
                         <Button variant={'contained'} className={classes.btn} onClick={handleClose}>Fechar</Button>
+                        <Button variant={'contained'} className={classes.btn} onClick={handlePrint}>Imprimir</Button>
 
                     </div>
                 </Fade>
