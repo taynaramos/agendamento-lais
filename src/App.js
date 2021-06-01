@@ -34,15 +34,13 @@ function App() {
       {/* {JSON.stringify(agendamentos)} */}
 
       <GlobalStyle />
-      <div className={'wrapper'}>
         <Switch>
           <Route exact path={'/'} component={Login} />
           <Route path={'/exemplo'} component={Exemplo} />
           <Route path={'/signup'} component={Signup} />
-          <Route path={'/agendamentos'} component={Agendamento} />
+          <Route path={'/agendamentos/:name'} component={() => <Agendamento />} />
           <Route path={'/mudar-senha'} component={ChangePassword} />
         </Switch>
-      </div>
     </>
   )
 }

@@ -69,13 +69,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'PoppinsLight';
   }
 
-  .wrapper {
-    flex: 1;
-    position: relative;
-    max-width: 1920px;
-    margin: 0px auto;
-  }
-
   a {
     text-decoration: none;
     color: #4A4A4A;

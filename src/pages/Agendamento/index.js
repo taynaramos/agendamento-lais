@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { useParams } from "react-router-dom";
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import SearchIcon from '@material-ui/icons/Search'
@@ -16,10 +18,10 @@ import user from 'assets/images/user-blue.svg'
 
 export const Agendamento = () => {
 
+  const { name } = useParams();
+
   const [isOpen, setIsOpen] = useState(false)
-  const [tabOption, setTabOption] = useState('meus-agendamentos');
-
-
+  const [tabOption, setTabOption] = useState('meus-agendamentos')
 
   function meusAgendamentos() {
     setTabOption('meus-agendamentos')
@@ -27,8 +29,6 @@ export const Agendamento = () => {
   function agendar() {
     setTabOption('agendar')
   }
-
-
 
   return (
     <Container>
@@ -49,7 +49,7 @@ export const Agendamento = () => {
             <div className={'profile-select-text'}>
               <span>Seja bem vindo</span>
               {/* depois substituir por {nome} */}
-              <span id={'name'}>Johnny Clark</span>
+              <span id={'name'}>{name}</span>
             </div>
 
             <ExpandMoreIcon fontSize="small" onClick={() => setIsOpen(!isOpen)} className={isOpen ? 'icon-expanded' : ''} />
@@ -115,7 +115,7 @@ export const Agendamento = () => {
           {tabOption === "meus-agendamentos" ?
             <MeusAgendamentos />
             :
-            <Agendar />
+            <Agendar name={name}/>
           }
 
         </div>

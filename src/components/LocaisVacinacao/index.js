@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export const LocaisVacinacao = ({ dados, arrayDisponibilidade }) => {
+export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
 
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -145,7 +145,7 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade }) => {
 
                         <Divider />
 
-                        <p className={classes.field}>Cidadão: <span className={classes.fieldData}>José da Silva Sauro</span></p>
+                        <p className={classes.field}>Cidadão: <span className={classes.fieldData}>{name}</span></p>
                         <p className={classes.field}>Localização: <span className={classes.fieldData}>{selectedLocal}</span></p>
                         <p className={classes.field}>Vacina: <span className={classes.fieldData}>Coronavac - Buntantan</span></p>
                         <Button variant={'contained'} className={classes.btn} onClick={handleClose}>Fechar</Button>

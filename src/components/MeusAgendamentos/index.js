@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import { InputLabel, FormControl, NativeSelect } from '@material-ui/core'
+import { Formik } from 'formik'
+
+import { TextField, MenuItem } from '@material-ui/core'
 
 import api from 'services/api'
 
@@ -10,7 +12,9 @@ import filter from 'assets/images/filter.svg'
 import { Container } from './style'
 
 export const MeusAgendamentos = () => {
+
     const [agendamentos, setAgendamentos] = useState([]);
+    const [filterSelect, setFilterSelect] = React.useState('localizacao');
 
     useEffect(() => {
         const loadAgendamentos = async () => {
@@ -24,6 +28,17 @@ export const MeusAgendamentos = () => {
 
     const arrayAgendamentos = agendamentos.data
 
+    // const initialValues = {
+    //     filterSelect: 'localizacao',
+    // }
+
+    const handleSelect = event => {
+
+        setFilterSelect(event.target.value);
+        console.log(event.target.value)
+        // console.log(filterSelect)
+    };
+
     return (
 
         <Container>
@@ -33,10 +48,33 @@ export const MeusAgendamentos = () => {
                 <div className={'agendamento-filter-select'}>
                     <img src={filter} alt={''} />
 
-                    <select name="select">
+                    {/* <select name="select" id="select">
                         <option value="localizacao">Local de Vacina</option>
                         <option value="data">Data</option>
-                    </select>
+                    </select> */}
+
+                    <Formik>
+
+                        <form>
+                            <TextField
+                                fullWidth
+                                select
+                                variant="outlined"
+                                id="filterSelect"
+                                name="filterSelect"
+                                value={filterSelect}
+                                onChange={handleSelect}
+                            >
+                                <MenuItem key={'localizacao'} value={'localizacao'}>
+                                    Locais de Vacinação
+                                        </MenuItem>
+                                <MenuItem key={'data'} value={'data'}>
+                                    Data
+                                        </MenuItem>
+                            </TextField>
+                        </form>
+
+                    </Formik>
 
                 </div>
             </div>

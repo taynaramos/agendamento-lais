@@ -31,9 +31,9 @@ display: flex;
 
 .menu-profile {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    /* justify-content: flex-start; */
     align-items: center;
-    /* margin-bottom: 2.5rem; */
 }
 
 .menu-profile > img {
@@ -49,9 +49,13 @@ display: flex;
 .profile-select-text{
     display: flex;
     flex-direction: column;
-    margin-right: 1rem;
+    margin-right: 8px;
     font-size: 16px;
     font-family: 'PoppinsLight';
+}
+
+.profile-select-text span {
+    width: max-content;
 }
 
 #name {

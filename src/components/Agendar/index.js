@@ -8,7 +8,7 @@ import api from 'services/api'
 import { Container } from './style'
 import { LocaisVacinacao } from 'components';
 
-export const Agendar = () => {
+export const Agendar = ({ name }) => {
 
 
     const initialValues = {
@@ -153,7 +153,7 @@ export const Agendar = () => {
 
             </Container>
 
-            {openLocais && <LocaisVacinacao dados={dados} arrayDisponibilidade={isOK && arrayDisponibilidade} />}
+            {openLocais && <LocaisVacinacao name={name} dados={dados} arrayDisponibilidade={isOK && arrayDisponibilidade} />}
 
         </React.Fragment>
     )
