@@ -31,6 +31,7 @@ width: 35%;
     align-items: center;
     color: #fff;
     margin-top: 15rem;
+    text-align: center;
 }
 
 .banner-text p {

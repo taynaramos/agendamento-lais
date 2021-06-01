@@ -48,11 +48,6 @@ export const MeusAgendamentos = () => {
                 <div className={'agendamento-filter-select'}>
                     <img src={filter} alt={''} />
 
-                    {/* <select name="select" id="select">
-                        <option value="localizacao">Local de Vacina</option>
-                        <option value="data">Data</option>
-                    </select> */}
-
                     <Formik>
 
                         <form>
@@ -67,10 +62,10 @@ export const MeusAgendamentos = () => {
                             >
                                 <MenuItem key={'localizacao'} value={'localizacao'}>
                                     Locais de Vacinação
-                                        </MenuItem>
+                                </MenuItem>
                                 <MenuItem key={'data'} value={'data'}>
                                     Data
-                                        </MenuItem>
+                                </MenuItem>
                             </TextField>
                         </form>
 
