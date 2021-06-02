@@ -4,10 +4,11 @@ export const Container = styled.div`
 
 display: flex;
 justify-content: center;
+width: 100%;
 
 
 .form {
-    width: 100%;
+    width: 40%;
     max-width: 30rem;
     padding: 2rem 3rem;
     color: #4a4a4a;

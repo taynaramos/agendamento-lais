@@ -17,8 +17,11 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#fff',
         border: 'none',
         borderRadius: '4px',
-        padding: '1.5rem 3rem',
+        padding: '1.5rem 2rem',
         width: '60%',
+    },
+    print: {
+        padding: '1rem 1rem',
     },
     title: {
         color: '#00B3F3',
@@ -35,7 +38,7 @@ const useStyles = makeStyles(() => ({
         color: '#FF4646',
         fontFamily: 'PoppinsRegular',
         fontSize: '16px',
-        marginBottom:'3rem',
+        marginBottom: '3rem',
 
     },
     dataTime: {
@@ -46,7 +49,7 @@ const useStyles = makeStyles(() => ({
         color: '#20D5AB',
         fontFamily: 'PoppinsBold',
         fontSize: '24px',
-        marginLeft:'15px'
+        marginLeft: '15px'
     },
     field: {
         fontFamily: 'PoppinsBold',
@@ -55,7 +58,7 @@ const useStyles = makeStyles(() => ({
     fieldData: {
         fontFamily: 'PoppinsRegular',
         fontSize: '16px',
-        marginLeft:'8px'
+        marginLeft: '8px'
     }
 }));
 
@@ -70,7 +73,7 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
 
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
-      content: () => componentRef.current,
+        content: () => componentRef.current,
     });
 
     const arr = arrayDisponibilidade.filter((option) => option.municipio === municipio)
@@ -134,26 +137,28 @@ export const LocaisVacinacao = ({ dados, arrayDisponibilidade, name }) => {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper} ref={componentRef}>
-                        <h2 className={classes.title} id="transition-modal-title">Comprovante de agendamento</h2>
+                    <div className={classes.paper} >
+                        <div className={classes.print} ref={componentRef}>
+                            <h2 className={classes.title} id="transition-modal-title">Comprovante de agendamento</h2>
 
-                        <div>
-                            <span className={classes.dataTime}>{selectedDate} às {selectedTime}</span>
-                            <span className={classes.confirmation}>Agendado</span>
+                            <div>
+                                <span className={classes.dataTime}>{selectedDate} às {selectedTime}</span>
+                                <span className={classes.confirmation}>Agendado</span>
+                            </div>
+
+                            <h4>Orientações</h4>
+                            <ul className={classes.list}>
+                                <li>Caso sejam informados dados falsos relacionados ao seu agendamento, ele poderá ser cancelado a critério do vacinador ou supervisor da sala de vacina (Art. 299 - Código Penal)</li>
+                                <li>Você poderá cancelar seu agendamento com até 24h de antecedência. Em caso de não comparecimento, um novo agendamento será permitido após 48h do agendamento anterior.</li>
+                                <li>O horário de agendamento poderá sofrer alterações, caso surjam problemas logísticos identificados pelo supervisor da sala de vacina</li>
+                            </ul>
+
+                            <Divider />
+
+                            <p className={classes.field}>Cidadão: <span className={classes.fieldData}>{name}</span></p>
+                            <p className={classes.field}>Localização: <span className={classes.fieldData}>{selectedLocal}</span></p>
+                            <p className={classes.field}>Vacina: <span className={classes.fieldData}>Coronavac - Buntantan</span></p>
                         </div>
-
-                        <h4>Orientações</h4>
-                        <ul className={classes.list}>
-                            <li>Caso sejam informados dados falsos relacionados ao seu agendamento, ele poderá ser cancelado a critério do vacinador ou supervisor da sala de vacina (Art. 299 - Código Penal)</li>
-                            <li>Você poderá cancelar seu agendamento com até 24h de antecedência. Em caso de não comparecimento, um novo agendamento será permitido após 48h do agendamento anterior.</li>
-                            <li>O horário de agendamento poderá sofrer alterações, caso surjam problemas logísticos identificados pelo supervisor da sala de vacina</li>
-                        </ul>
-
-                        <Divider />
-
-                        <p className={classes.field}>Cidadão: <span className={classes.fieldData}>{name}</span></p>
-                        <p className={classes.field}>Localização: <span className={classes.fieldData}>{selectedLocal}</span></p>
-                        <p className={classes.field}>Vacina: <span className={classes.fieldData}>Coronavac - Buntantan</span></p>
                         <Button variant={'contained'} className={classes.btn} onClick={handleClose}>Fechar</Button>
                         <Button variant={'contained'} className={classes.btn} onClick={handlePrint}>Imprimir</Button>
 
