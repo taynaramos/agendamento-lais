@@ -17,6 +17,10 @@ export const FormLogin = () => {
 
     let history = useHistory();
 
+    const userDefault = {
+        name: 'Johnny Clark'
+    }
+
     return (
         <Container className={'main-form'}>
 
@@ -41,9 +45,8 @@ export const FormLogin = () => {
                                 // alert(JSON.stringify(values, null, 2));
 
                                 alert("Dados salvos com sucesso!");
-                                history.push("/agendamentos")
+                                history.push(`/agendamentos/${userDefault.name}`)
 
-                                console.log(values)
                                 setSubmitting(false);
                             }, 400);
                         }}

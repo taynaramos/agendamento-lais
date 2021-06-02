@@ -50,7 +50,6 @@ export const FormSignup = () => {
                                 alert("Dados salvos com sucesso!");
                                 history.push(`/agendamentos/${values.name}`)
 
-                                console.log(values)
                                 setSubmitting(false)
                             }, 400);
                         }}

@@ -61,7 +61,6 @@ export const ChangePassword = () => {
 
                   alert("Email com sucesso!");
 
-                  console.log(values)
                   setSubmitting(false);
                 }, 400);
               }}
