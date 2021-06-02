@@ -18,17 +18,20 @@ export const Container = styled.div`
     justify-content: flex-start;
 }
 
-.agendamento-filter-select img {
+.filter-form {
+    display: flex;
+    margin-bottom: 1rem;
+    width:100%;
+}
+
+.filter-form img {
     margin-right: 20px;
     width: 20px;
 }
 
-.agendamento-filter-select select {
-    width: 10rem;
-    padding: 0.5rem 0.8rem;
-    border: solid 1px #1E293B;
-    border-radius: 4px;
-    background-color: #fff;
+.filter-form > div {
+    margin: 0 1rem;
+    max-width: 25%;
 }
 
 .agendamento-cards {

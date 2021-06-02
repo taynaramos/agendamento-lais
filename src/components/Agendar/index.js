@@ -1,7 +1,7 @@
-import React, { ReactDOM, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Paper, TextField, Button, MenuItem } from '@material-ui/core';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 
 import api from 'services/api'
 
@@ -9,7 +9,6 @@ import { Container } from './style'
 import { LocaisVacinacao } from 'components';
 
 export const Agendar = ({ name }) => {
-
 
     const initialValues = {
         campanha: '',
@@ -101,7 +100,7 @@ export const Agendar = ({ name }) => {
                                     >
                                         <MenuItem key={'covid19'} value={'covid19'}>
                                             Covid 19
-                                    </MenuItem>
+                                        </MenuItem>
                                     </TextField>
 
                                     <span>Municipio</span>
