@@ -75,7 +75,10 @@ export const MeusAgendamentos = () => {
                             resetForm
                         }) => (
                             <form onSubmit={handleSubmit} className={'filter-form'}>
-                            <img src={filter} alt={''} onClick={resetForm} />
+                            <img src={filter} alt={''} onClick={() => {
+                                resetForm()
+                                handleSubmit()
+                            }} />
                                     <TextField
                                         fullWidth
                                         select
