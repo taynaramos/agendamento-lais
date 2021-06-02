@@ -1,5 +1,4 @@
 export { Agendamento } from './Agendamento'
 export { Login } from './Login'
-export { Exemplo } from './Exemplo'
 export { Signup } from './Signup'
 export { ChangePassword } from '../pages/ChangePassword'

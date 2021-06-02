@@ -33,6 +33,21 @@ export const Agendamento = () => {
   return (
     <Container>
 
+      <div className={'header-mobile'}>
+
+        <div className={'menu-logo'}>
+          <img src={calendar} alt={''}></img>
+          <h3>Agendamento Online</h3>
+        </div>
+
+        <div className={'menu-profile'}>
+
+          <img src={profile} alt={''}></img>
+          <ExpandMoreIcon fontSize="small" onClick={() => setIsOpen(!isOpen)} className={isOpen ? 'icon-expanded' : ''} />
+
+        </div>
+      </div>
+
       <section className={'menu'}>
 
         <div className={'menu-logo'}>
@@ -88,6 +103,18 @@ export const Agendamento = () => {
 
       </section>
 
+      <section className={'menu-mobile'}>
+        <Button variant={'contained'} className={tabOption === "meus-agendamentos" ? 'tabs-btn tabs-btn-focus' : 'tabs-btn'} onClick={meusAgendamentos}>
+          <img src={tabOption === "meus-agendamentos" ? folderWhite : folder} alt={''} className={'tabs-btn-icon'} id={'folder'} />
+          <span>Meus agendamentos</span>
+        </Button>
+
+        <Button variant={'contained'} className={tabOption === "agendar" ? 'tabs-btn tabs-btn-focus' : 'tabs-btn'} onClick={agendar}>
+          <CreateRoundedIcon fontSize="small" className={'tabs-btn-icon'} />
+          <span>Agendar</span>
+        </Button>
+      </section>
+
       <section className={'main'}>
 
         <div className={'main-header'}>
@@ -96,7 +123,7 @@ export const Agendamento = () => {
             {tabOption === "meus-agendamentos" ? 'Meus agendamentos' : 'Agendar'}
           </div>
 
-          <div className={'main-header-search'}>
+          {/* <div className={'main-header-search'}>
             <InputBase
               placeholder="Pesquisar"
               inputProps={{ 'aria-label': 'search' }}
@@ -105,7 +132,7 @@ export const Agendamento = () => {
             <div className={'search-icon'}>
               <SearchIcon />
             </div>
-          </div>
+          </div> */}
 
         </div>
 
@@ -115,7 +142,7 @@ export const Agendamento = () => {
           {tabOption === "meus-agendamentos" ?
             <MeusAgendamentos />
             :
-            <Agendar name={name}/>
+            <Agendar name={name} />
           }
 
         </div>

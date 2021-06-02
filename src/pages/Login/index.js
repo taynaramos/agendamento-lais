@@ -33,7 +33,7 @@ export const Login = () => {
 
         </div>
 
-        <FormLogin/>
+        <FormLogin />
 
       </section>
 

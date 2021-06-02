@@ -8,6 +8,12 @@ padding: 0;
 height: 100%;
 width: 35%;
 
+@media (max-width: 850px) {
+    & {
+       display: none;
+    }
+}
+
 .banner {
     min-height: 100vh;
     width: 100%;

@@ -7,12 +7,28 @@ padding: 0;
 height: 100%;
 width: 100%;
 
+@media (max-width: 850px) {
+    & {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
 .main {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100vh;
     padding: 1rem;
+}
+
+@media (max-width: 850px) {
+    .main {
+        width: 90%;
+        margin: 0 auto;
+    }
+
 }
 
 .main-signup {

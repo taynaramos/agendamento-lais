@@ -4,11 +4,33 @@ export const Container = styled.main`
 
 display: flex;
 
+@media (max-width: 850px) {
+    & {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-mobile {
+        display: flex;
+        padding: 1rem;
+    }
+
+    .header-mobile .menu-profile img {
+        width: 50%;
+    }
+}
+
 .menu {
     width: 20%;
     min-height: 100vh;
     border-right: solid 1px #00B3F3;
     padding: 1.5rem;
+}
+
+@media (max-width: 850px) {
+    .menu {
+        display: none;
+    }
 }
 
 .menu-logo {
@@ -32,7 +54,6 @@ display: flex;
 .menu-profile {
     display: flex;
     justify-content: space-around;
-    /* justify-content: flex-start; */
     align-items: center;
 }
 
@@ -56,6 +77,7 @@ display: flex;
 
 .profile-select-text span {
     width: max-content;
+    max-width: 8rem;
 }
 
 #name {
@@ -83,6 +105,21 @@ display: flex;
 
 .select-option img {
     margin-right: 0.8rem;
+}
+
+.menu-mobile {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    bottom:0;
+    z-index: 1;
+    background-color: #1E293B;
+}
+
+@media (min-width: 851px) {
+    .menu-mobile, .header-mobile {
+        display: none;
+    }
 }
 
 .divider {

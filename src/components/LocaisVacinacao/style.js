@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
 
+margin-top: 2rem;
+
 .local-data-info {
     padding: 1rem 1.5rem;
 }
