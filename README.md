@@ -1,8 +1,8 @@
 # Projeto Agendamento para Vacinação
 
-Essa é uma aplicação feita com a finalidade de ser avaliado em uma das fases do processo seletivo para o projeto “PESQUISA APLICADA PARA INTEGRAÇÃO INTELIGENTE ORIENTADA AO FORTALECIMENTO DAS REDES DE ATENÇÃO PARA RESPOSTA RÁPIDA À SÍFILIS”.
+Essa é uma aplicação feita com a finalidade de ser avaliado em uma das fases do processo seletivo para o projeto “Pesquisa aplicada para integração inteligente orientada ao fortalecimento das redes de atenção para resposta rápida a sífilis”.
 
-### Para este projetto, foi utilizado
+### Para este projeto, foi utilizado
 
 - ReactJS
 - Material UI
