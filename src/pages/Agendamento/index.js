@@ -63,7 +63,6 @@ export const Agendamento = () => {
 
             <div className={'profile-select-text'}>
               <span>Seja bem vindo</span>
-              {/* depois substituir por {nome} */}
               <span id={'name'}>{name}</span>
             </div>
 
